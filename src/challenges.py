@@ -1,18 +1,18 @@
 # src/challenges.py
 
-from typing import Optional
-
-
-def count_evidence(evidence: list[str]) -> dict[str, int]:
+def count_evidence(evidence):
     counts = {}
 
     for item in evidence:
-        counts[item] = counts.get(item, 0) + 1
+        if item in counts:
+            counts[item] += 1
+        else:
+            counts[item] = 1
 
     return counts
 
 
-def first_repeated_id(ids: list[str]) -> Optional[str]:
+def first_repeated_id(ids):
     seen = set()
 
     for case_id in ids:
@@ -23,9 +23,9 @@ def first_repeated_id(ids: list[str]) -> Optional[str]:
     return None
 
 
-def valid_tags(tags: str) -> bool:
+def valid_tags(tags):
     stack = []
-    matching = {
+    pairs = {
         ")": "(",
         "]": "[",
         "}": "{",
@@ -36,10 +36,10 @@ def valid_tags(tags: str) -> bool:
             stack.append(char)
 
         elif char in ")]}":
-            if not stack:
+            if len(stack) == 0:
                 return False
 
-            if stack[-1] != matching[char]:
+            if stack[-1] != pairs[char]:
                 return False
 
             stack.pop()
@@ -47,23 +47,24 @@ def valid_tags(tags: str) -> bool:
     return len(stack) == 0
 
 
-def lookup_alias(aliases: dict[str, str], alias: str) -> Optional[str]:
+def lookup_alias(aliases, alias):
     return aliases.get(alias)
 
 
-def process_reports(reports: list[str]) -> list[str]:
+def process_reports(reports):
     return list(reports)
 
 
-def largest_time_gap(times: list[int]) -> int:
+def largest_time_gap(times):
     if len(times) < 2:
         return 0
 
     sorted_times = sorted(times)
-
     largest_gap = 0
+
     for i in range(1, len(sorted_times)):
         gap = sorted_times[i] - sorted_times[i - 1]
+
         if gap > largest_gap:
             largest_gap = gap
 
