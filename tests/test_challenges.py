@@ -12,9 +12,14 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from challenges import (count_evidence, first_repeated_id,  # noqa: E402
-                        largest_time_gap, lookup_alias, process_reports,
-                        valid_tags)
+from challenges import (  # noqa: E402
+    count_evidence,
+    first_repeated_id,
+    largest_time_gap,
+    lookup_alias,
+    process_reports,
+    valid_tags,
+)
 
 # -----------------------------------------------------------------------------
 # Required Problem 1: count_evidence
