@@ -3,18 +3,16 @@
 
 ## Student Name
 
-Write your name here.
+Kharka Kushal
 
 ## Summary
 
-Write 3–6 lines describing what this homework asks you to practice.
-
-Example topics:
-
-- frequency counting with dictionaries
-- duplicate detection with sets
-- stack matching with lists
-- lookup tables with dictionaries
+This homework practices fundamental data structures and algorithms patterns used in evidence processing:
+- **Frequency counting** with dictionaries to count evidence items
+- **Duplicate detection** with sets to find first repeated suspect IDs
+- **Stack-based validation** with lists to check balanced evidence tags
+- **Dictionary lookup** for alias-to-real-name resolution
+- Optional challenges: processing reports in order and finding largest time gaps
 
 ## How to Run Tests
 
@@ -56,31 +54,33 @@ Optional tests are skipped by default. To run them, remove the `@pytest.mark.ski
 
 ### Pattern
 
-Write the pattern name here.
+Frequency Counting / Hash Map Counting
 
 ### Data Structure
 
-Write the data structure here.
+Dictionary (Hash Map)
 
 ### Approach
 
-- Step 1:
-- Step 2:
-- Step 3:
+- Step 1: Initialize an empty dictionary to store counts
+- Step 2: Iterate through each evidence item in the input list
+- Step 3: For each item, increment its count in the dictionary (or initialize to 1 if not present)
 
 ### Complexity
 
-- Time: `O(?)`
-- Space: `O(?)`
+- Time: `O(n)` where n is the number of evidence items
+- Space: `O(k)` where k is the number of unique evidence types
 
 Explain briefly:
+We use a dictionary to maintain counts of each evidence type. As we iterate through the list, we either increment an existing count or add a new entry. This gives us O(1) average lookup/insertion per item.
 
 ### Edge Cases Checked
 
-- [ ] Empty list
-- [ ] One item
-- [ ] Repeated items
-- [ ] Different labels
+- [x] Empty list
+- [x] One item
+- [x] Repeated items
+- [x] Different labels
+- [x] Case sensitivity
 
 ---
 
@@ -88,31 +88,32 @@ Explain briefly:
 
 ### Pattern
 
-Write the pattern name here.
+Seen Set / Duplicate Detection
 
 ### Data Structure
 
-Write the data structure here.
+Set (Hash Set)
 
 ### Approach
 
-- Step 1:
-- Step 2:
-- Step 3:
+- Step 1: Initialize an empty set to track seen IDs
+- Step 2: Iterate through each ID in the input list
+- Step 3: If the ID is already in the set, return it immediately (first duplicate); otherwise add it to the set
 
 ### Complexity
 
-- Time: `O(?)`
-- Space: `O(?)`
+- Time: `O(n)` where n is the number of IDs
+- Space: `O(n)` in worst case (no duplicates)
 
 Explain briefly:
+We maintain a set of seen IDs. As we iterate, the first ID we encounter that's already in the set is the first duplicate. Set operations (add/check) are O(1) average.
 
 ### Edge Cases Checked
 
-- [ ] Empty list
-- [ ] No repeated IDs
-- [ ] First two IDs match
-- [ ] Multiple repeated IDs
+- [x] Empty list
+- [x] No repeated IDs
+- [x] First two IDs match
+- [x] Multiple repeated IDs
 
 ---
 
@@ -120,33 +121,34 @@ Explain briefly:
 
 ### Pattern
 
-Write the pattern name here.
+Stack-based Bracket Matching
 
 ### Data Structure
 
-Write the data structure here.
+List used as Stack
 
 ### Approach
 
-- Step 1:
-- Step 2:
-- Step 3:
+- Step 1: Initialize an empty stack and a mapping of closing to opening brackets
+- Step 2: Iterate through each character in the string
+- Step 3: If it's an opening bracket, push to stack; if closing, check stack not empty and top matches corresponding opening bracket
 
 ### Complexity
 
-- Time: `O(?)`
-- Space: `O(?)`
+- Time: `O(n)` where n is the length of the input string
+- Space: `O(n)` in worst case (all opening brackets)
 
 Explain briefly:
+We use a stack to track opening brackets. For each closing bracket, we verify it matches the most recent unclosed opening bracket (stack top). Non-bracket characters are ignored. Valid if stack is empty at end.
 
 ### Edge Cases Checked
 
-- [ ] Empty string
-- [ ] Correctly nested tags
-- [ ] Mismatched tags
-- [ ] Closing tag before opening tag
-- [ ] Unclosed opening tag
-- [ ] Non-bracket characters
+- [x] Empty string
+- [x] Correctly nested tags
+- [x] Mismatched tags
+- [x] Closing tag before opening tag
+- [x] Unclosed opening tag
+- [x] Non-bracket characters
 
 ---
 
@@ -154,29 +156,30 @@ Explain briefly:
 
 ### Pattern
 
-Write the pattern name here.
+Dictionary Lookup / Hash Map Lookup
 
 ### Data Structure
 
-Write the data structure here.
+Dictionary (Hash Map)
 
 ### Approach
 
-- Step 1:
-- Step 2:
+- Step 1: Use the dictionary's `.get()` method with the alias as key
+- Step 2: Return the value (real name) if found, or None if not found
 
 ### Complexity
 
-- Time: `O(?)`
-- Space: `O(?)`
+- Time: `O(1)` average case
+- Space: `O(1)` additional
 
 Explain briefly:
+Direct dictionary lookup using `.get()` method which returns the value for a key or None if key doesn't exist. This is the idiomatic Python way to do safe dictionary lookups.
 
 ### Edge Cases Checked
 
-- [ ] Known alias
-- [ ] Unknown alias
-- [ ] Empty dictionary
+- [x] Known alias
+- [x] Unknown alias
+- [x] Empty dictionary
 
 ---
 
@@ -184,17 +187,15 @@ Explain briefly:
 
 ## AI Used?
 
-- [ ] Yes
+- [x] Yes
 - [ ] No
 
 ## If yes, what did AI help with?
 
-Write 1–3 bullets.
-
--
--
--
+- Helped with understanding the problem requirements and patterns
+- Assisted in writing clean, efficient Python implementations
+- Helped structure the README documentation
 
 ## Other Sources
 
-List any non-course sources you used. If none, write `None`.
+None
