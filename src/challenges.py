@@ -1,7 +1,9 @@
 # src/challenges.py
+from collections import deque
 
-def count_evidence(evidence):
-    counts = {}
+
+def count_evidence(evidence: list[str]) -> dict[str, int]:
+    counts: dict[str, int] = {}
 
     for item in evidence:
         if item in counts:
@@ -12,8 +14,8 @@ def count_evidence(evidence):
     return counts
 
 
-def first_repeated_id(ids):
-    seen = set()
+def first_repeated_id(ids: list[str]) -> str | None:
+    seen: set[str] = set()
 
     for case_id in ids:
         if case_id in seen:
@@ -23,8 +25,8 @@ def first_repeated_id(ids):
     return None
 
 
-def valid_tags(tags):
-    stack = []
+def valid_tags(tags: str) -> bool:
+    stack: list[str] = []
     pairs = {
         ")": "(",
         "]": "[",
@@ -47,15 +49,21 @@ def valid_tags(tags):
     return len(stack) == 0
 
 
-def lookup_alias(aliases, alias):
+def lookup_alias(aliases: dict[str, str], alias: str) -> str | None:
     return aliases.get(alias)
 
 
-def process_reports(reports):
-    return list(reports)
+def process_reports(reports: list[str]) -> list[str]:
+    queue: deque[str] = deque(reports)
+    result: list[str] = []
+
+    while queue:
+        result.append(queue.popleft())
+
+    return result
 
 
-def largest_time_gap(times):
+def largest_time_gap(times: list[int]) -> int:
     if len(times) < 2:
         return 0
 

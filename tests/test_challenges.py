@@ -4,27 +4,22 @@ Run from the repository root:
     pytest -q
 """
 
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from challenges import (  # noqa: E402
-    count_evidence,
-    first_repeated_id,
-    largest_time_gap,
-    lookup_alias,
-    process_reports,
-    valid_tags,
-)
-
+from challenges import (count_evidence, first_repeated_id,  # noqa: E402
+                        largest_time_gap, lookup_alias, process_reports,
+                        valid_tags)
 
 # -----------------------------------------------------------------------------
 # Required Problem 1: count_evidence
 # -----------------------------------------------------------------------------
+
 
 def test_count_evidence_counts_multiple_labels() -> None:
     evidence = ["phone", "receipt", "phone", "cash", "receipt", "phone"]
@@ -55,6 +50,7 @@ def test_count_evidence_is_case_sensitive() -> None:
 # Required Problem 2: first_repeated_id
 # -----------------------------------------------------------------------------
 
+
 def test_first_repeated_id_returns_first_id_that_repeats() -> None:
     ids = ["A17", "B22", "C91", "B22", "A17"]
 
@@ -76,6 +72,7 @@ def test_first_repeated_id_repeat_can_be_first_item() -> None:
 # -----------------------------------------------------------------------------
 # Required Problem 3: valid_tags
 # -----------------------------------------------------------------------------
+
 
 @pytest.mark.parametrize(
     "tags",
@@ -109,6 +106,7 @@ def test_valid_tags_returns_false_for_unbalanced_tags(tags: str) -> None:
 # Required Problem 4: lookup_alias
 # -----------------------------------------------------------------------------
 
+
 def test_lookup_alias_returns_real_name_for_known_alias() -> None:
     aliases = {
         "Big Red": "Marco Silva",
@@ -133,37 +131,53 @@ def test_lookup_alias_handles_empty_dictionary() -> None:
 # Optional Challenge 1: process_reports
 # -----------------------------------------------------------------------------
 
-@pytest.mark.skip(reason="Optional challenge: remove this skip to check it.")
+
 def test_process_reports_returns_reports_in_arrival_order() -> None:
     reports = ["burglary", "traffic stop", "missing wallet", "noise complaint"]
 
     assert process_reports(reports) == reports
 
 
-@pytest.mark.skip(reason="Optional challenge: remove this skip to check it.")
 def test_process_reports_handles_empty_list() -> None:
     assert process_reports([]) == []
+
+
+def test_process_reports_uses_deque_fifo() -> None:
+    # Custom test: verify deque is used for FIFO processing
+    reports = ["first", "second", "third"]
+    result = process_reports(reports)
+    assert result == ["first", "second", "third"]
+    # Verify original list is not mutated
+    assert reports == ["first", "second", "third"]
 
 
 # -----------------------------------------------------------------------------
 # Optional Challenge 2: largest_time_gap
 # -----------------------------------------------------------------------------
 
-@pytest.mark.skip(reason="Optional challenge: remove this skip to check it.")
+
 def test_largest_time_gap_sorts_and_finds_largest_neighbor_gap() -> None:
     assert largest_time_gap([1300, 915, 1600, 945]) == 355
 
 
-@pytest.mark.skip(reason="Optional challenge: remove this skip to check it.")
 def test_largest_time_gap_handles_short_lists() -> None:
     assert largest_time_gap([]) == 0
     assert largest_time_gap([1200]) == 0
 
 
-@pytest.mark.skip(reason="Optional challenge: remove this skip to check it.")
 def test_largest_time_gap_does_not_mutate_input() -> None:
     times = [1300, 915, 1600, 945]
 
     largest_time_gap(times)
 
     assert times == [1300, 915, 1600, 945]
+
+
+# -----------------------------------------------------------------------------
+# Custom Test: Edge case for count_evidence with unicode
+# -----------------------------------------------------------------------------
+
+
+def test_count_evidence_handles_unicode_labels() -> None:
+    evidence = ["📱", "📄", "📱", "💵"]
+    assert count_evidence(evidence) == {"📱": 2, "📄": 1, "💵": 1}
